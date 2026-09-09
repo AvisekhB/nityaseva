@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nityaseva — Someone your family can trust, when you can't be there</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F8F4EA;
+    --paper-card:#FFFFFF;
+    --ink:#262524;
+    --ink-soft:#6B6E70;
+    --forest:#2E4F6B;
+    --teal:#4C7BA4;
+    --amber:#C9A66B;
+    --amber-deep:#A9824C;
+    --line:#DCDDD9;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Karla',sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--forest);
+    margin:0 0 .4em;
+  }
+  p{margin:0 0 1em;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  /* HERO */
+  header.hero{
+    padding:72px 0 56px;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:48px;
+    align-items:center;
+  }
+  .brand-mark{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  .brand-mark svg{background:var(--forest);border-radius:50%;padding:6px;width:34px;height:34px;}
+  .brand-name{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;color:var(--forest);letter-spacing:.01em;}
+  .tagline{font-style:italic;color:var(--amber-deep);font-size:.95rem;margin:0 0 16px;}
+  .eyebrow-free{font-size:.95rem;color:var(--ink-soft);margin-bottom:18px;max-width:34ch;}
+  h1.headline{
+    font-size:clamp(2.1rem,4.5vw,3.2rem);
+    line-height:1.12;
+    max-width:14ch;
+  }
+  .headline em{font-style:italic;color:var(--teal);}
+  .hero-sub{font-size:1.08rem;color:var(--ink-soft);max-width:42ch;margin:18px 0 28px;}
+  .btn{
+    display:inline-block;
+    background:var(--forest);
+    color:#fff;
+    padding:14px 28px;
+    border-radius:999px;
+    text-decoration:none;
+    font-weight:600;
+    font-size:1rem;
+    border:none;
+    cursor:pointer;
+  }
+  .btn:hover{background:var(--teal);}
+  .btn-block{width:100%;text-align:center;}
+  .hero-illustration{width:100%;height:auto;}
+
+  /* PAIN POINTS */
+  section.pain{padding:16px 0 56px;}
+  .pain-list{list-style:none;margin:0;padding:0;display:grid;gap:18px;max-width:640px;}
+  .pain-list li{
+    border-left:3px solid var(--amber);
+    padding:4px 0 4px 20px;
+    color:var(--ink-soft);
+    font-size:1.05rem;
+  }
+  .pain-list strong{color:var(--ink);}
+
+  /* PILLARS */
+  section.pillars{padding:32px 0 64px;border-top:1px solid var(--line);}
+  .pillars-row{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:32px;
+  }
+  .pillar h3{font-size:1.15rem;margin-bottom:6px;}
+  .pillar p{color:var(--ink-soft);font-size:.98rem;margin:0;}
+  .pillar-mark{
+    display:inline-block;width:8px;height:8px;border-radius:50%;
+    background:var(--amber);margin-bottom:12px;
+  }
+
+  /* SURVEY */
+  section.survey{padding:16px 0 88px;}
+  .survey-card{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:36px clamp(20px,4vw,48px);
+    max-width:720px;
+    margin:0 auto;
+  }
+  .survey-card h2{font-size:1.6rem;margin-bottom:8px;}
+  .survey-intro{color:var(--ink-soft);margin-bottom:28px;}
+  fieldset{border:none;padding:0;margin:0 0 26px;}
+  legend{
+    font-weight:600;font-size:.95rem;color:var(--forest);
+    padding:0;margin:0 0 10px;
+  }
+  label.field{display:block;margin-bottom:16px;}
+  label.field span{display:block;font-size:.9rem;color:var(--ink-soft);margin-bottom:6px;}
+  input[type=text],input[type=tel],input[type=number],select{
+    width:100%;
+    padding:11px 14px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    font-family:'Karla',sans-serif;
+    font-size:1rem;
+    background:#fff;
+    color:var(--ink);
+  }
+  input:focus,select:focus{outline:2px solid var(--teal);outline-offset:1px;}
+  .pill-group{display:flex;flex-wrap:wrap;gap:8px;}
+  .pill-group input{position:absolute;opacity:0;pointer-events:none;}
+  .pill-group label{
+    border:1px solid var(--line);
+    padding:9px 16px;
+    border-radius:999px;
+    font-size:.92rem;
+    cursor:pointer;
+    color:var(--ink-soft);
+  }
+  .pill-group input:checked + label{
+    background:var(--forest);
+    border-color:var(--forest);
+    color:#fff;
+  }
+  .price-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .price-grid label.field span{font-size:.85rem;}
+  @media (max-width:640px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-illustration{max-width:260px;margin:0 auto;}
+    .pillars-row{grid-template-columns:1fr;gap:24px;}
+    .price-grid{grid-template-columns:1fr;}
+  }
+  #thankyou{display:none;text-align:center;padding:24px 0;}
+  #thankyou h2{margin-bottom:8px;}
+  #error-msg{display:none;color:#B3441E;font-size:.9rem;margin-top:8px;}
+
+  footer{padding:36px 0 60px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:.9rem;}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="brand-mark">
+        <svg width="34" height="34" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#F8F4EA" stroke="#2E4F6B" stroke-width="1.5">
+            <ellipse cx="32" cy="34" rx="7" ry="16" transform="rotate(0 32 34)"/>
+            <ellipse cx="32" cy="34" rx="7" ry="16" transform="rotate(45 32 34)"/>
+            <ellipse cx="32" cy="34" rx="7" ry="16" transform="rotate(90 32 34)"/>
+            <ellipse cx="32" cy="34" rx="7" ry="16" transform="rotate(135 32 34)"/>
+          </g>
+          <circle cx="32" cy="34" r="4.5" fill="#C9A66B"/>
+        </svg>
+        <span class="brand-name">Nityaseva</span>
+      </div>
+      <p class="tagline">Eternal service, timeless care.</p>
+      <p class="eyebrow-free">Home care for seniors in Asansol</p>
+      <h1 class="headline">Your parent shouldn't have to manage alone. <em>Neither should you.</em></h1>
+      <p class="hero-sub">Nityaseva sends a trained care executive to check in, track health, and handle the small emergencies — so you know how your parent is really doing, even from another city.</p>
+      <a href="#survey" class="btn">Tell us what you need — 2 minutes</a>
+    </div>
+    <div>
+      <svg class="hero-illustration" viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="160" cy="140" r="128" fill="#E9E3D3"/>
+        <path d="M90 170 L90 110 L160 60 L230 110 L230 170 Q230 190 210 190 L110 190 Q90 190 90 170 Z" fill="#FFFFFF" stroke="#2E4F6B" stroke-width="4"/>
+        <rect x="145" y="150" width="30" height="40" fill="#4C7BA4"/>
+        <circle cx="160" cy="110" r="18" fill="#C9A66B"/>
+        <path d="M140 130 Q160 118 180 130" stroke="#2E4F6B" stroke-width="3" fill="none"/>
+        <path d="M100 220 Q160 245 220 220" stroke="#4C7BA4" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <circle cx="100" cy="220" r="6" fill="#2E4F6B"/>
+        <circle cx="220" cy="220" r="6" fill="#2E4F6B"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section class="pain">
+  <div class="wrap">
+    <ul class="pain-list">
+      <li><strong>You call, and everything sounds fine</strong> — but you can't actually see how they're doing day to day.</li>
+      <li><strong>A fall or a missed dose</strong> can go unnoticed for hours when no one is nearby.</li>
+      <li><strong>You've looked for help before</strong> and found either nothing reliable, or nothing that felt trustworthy enough.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="pillars">
+  <div class="wrap pillars-row">
+    <div class="pillar">
+      <span class="pillar-mark"></span>
+      <h3>Regular visits, real reports</h3>
+      <p>A care executive visits on schedule and logs wellbeing, meals, medication, and safety — you see it the same day.</p>
+    </div>
+    <div class="pillar">
+      <span class="pillar-mark"></span>
+      <h3>Health tracked, not guessed</h3>
+      <p>Blood pressure, pulse, sugar — recorded at every visit, so changes get caught early, not after a crisis.</p>
+    </div>
+    <div class="pillar">
+      <span class="pillar-mark"></span>
+      <h3>One number for emergencies</h3>
+      <p>Ambulance, hospital, doctor — coordinated by someone who already knows your parent, not a stranger.</p>
+    </div>
+  </div>
+</section>
+
+<section class="survey" id="survey">
+  <div class="wrap">
+    <div class="survey-card">
+      <div id="form-wrap">
+        <h2>Help us build this right</h2>
+        <p class="survey-intro">Two minutes. No sales call. This tells us what to actually build first.</p>
+
+        <form id="survey-form">
+          <fieldset>
+            <legend>About you</legend>
+            <label class="field"><span>Your name</span>
+              <input type="text" name="full_name" required />
+            </label>
+            <label class="field"><span>Phone number</span>
+              <input type="tel" name="phone" required placeholder="+91" />
+            </label>
+            <label class="field"><span>Your relationship to the senior</span>
+              <select name="relationship" required>
+                <option value="">Select</option>
+                <option>Son</option>
+                <option>Daughter</option>
+                <option>Spouse</option>
+                <option>Other relative</option>
+                <option>Myself (I'm the senior)</option>
+              </select>
+            </label>
+            <label class="field"><span>Which city do they live in?</span>
+              <input type="text" name="senior_city" placeholder="e.g. Asansol" required />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Their situation today</legend>
+            <div class="pill-group" data-name="living_arrangement">
+              <input type="radio" name="living_arrangement" id="la1" value="Lives alone" required><label for="la1">Lives alone</label>
+              <input type="radio" name="living_arrangement" id="la2" value="With family"><label for="la2">With family</label>
+              <input type="radio" name="living_arrangement" id="la3" value="With an attendant"><label for="la3">With an attendant</label>
+              <input type="radio" name="living_arrangement" id="la4" value="Assisted living"><label for="la4">Assisted living</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>What worries you most?</legend>
+            <div class="pill-group" data-name="biggest_concern">
+              <input type="radio" name="biggest_concern" id="bc1" value="Falls or medical emergencies" required><label for="bc1">Falls / emergencies</label>
+              <input type="radio" name="biggest_concern" id="bc2" value="Medication management"><label for="bc2">Medication</label>
+              <input type="radio" name="biggest_concern" id="bc3" value="Loneliness / mental wellbeing"><label for="bc3">Loneliness</label>
+              <input type="radio" name="biggest_concern" id="bc4" value="Daily needs (food, chores)"><label for="bc4">Daily needs</label>
+              <input type="radio" name="biggest_concern" id="bc5" value="Not sure / just want oversight"><label for="bc5">General oversight</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>If this existed as a monthly plan — your honest sense of price (₹/month)</legend>
+            <div class="price-grid">
+              <label class="field"><span>So cheap you'd doubt the quality</span>
+                <input type="number" name="price_too_cheap" min="0" step="100" required />
+              </label>
+              <label class="field"><span>A good bargain</span>
+                <input type="number" name="price_bargain" min="0" step="100" required />
+              </label>
+              <label class="field"><span>Getting expensive, but you'd still consider it</span>
+                <input type="number" name="price_getting_expensive" min="0" step="100" required />
+              </label>
+              <label class="field"><span>Too expensive — a dealbreaker</span>
+                <input type="number" name="price_too_expensive" min="0" step="100" required />
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>How likely are you to try this in the next 3 months?</legend>
+            <div class="pill-group" data-name="interest_level">
+              <input type="radio" name="interest_level" id="il1" value="Very likely" required><label for="il1">Very likely</label>
+              <input type="radio" name="interest_level" id="il2" value="Somewhat likely"><label for="il2">Somewhat likely</label>
+              <input type="radio" name="interest_level" id="il3" value="Just exploring"><label for="il3">Just exploring</label>
+              <input type="radio" name="interest_level" id="il4" value="Not likely"><label for="il4">Not likely</label>
+            </div>
+          </fieldset>
+
+          <button type="submit" class="btn btn-block">Submit</button>
+          <p id="error-msg">Something went wrong — please try again in a moment.</p>
+        </form>
+      </div>
+
+      <div id="thankyou">
+        <h2>Thank you</h2>
+        <p>We've noted this down. If you'd like a call when we launch in your area, we have your number.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Nityaseva Senior Care · Asansol, West Bengal · Questions? Message us on Instagram.
+  </div>
+</footer>
+
+<script>
+  // ---- Fill these in with your real Supabase project details ----
+  const SUPABASE_URL = "https://YOUR-PROJECT.supabase.co";
+  const SUPABASE_ANON_KEY = "your-anon-key";
+  // ------------------------------------------------------------------
+
+  const form = document.getElementById('survey-form');
+  const errorMsg = document.getElementById('error-msg');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorMsg.style.display = 'none';
+
+    const data = Object.fromEntries(new FormData(form).entries());
+    const payload = {
+      full_name: data.full_name,
+      phone: data.phone,
+      relationship: data.relationship,
+      senior_city: data.senior_city,
+      living_arrangement: data.living_arrangement,
+      biggest_concern: data.biggest_concern,
+      price_too_cheap: Number(data.price_too_cheap),
+      price_bargain: Number(data.price_bargain),
+      price_getting_expensive: Number(data.price_getting_expensive),
+      price_too_expensive: Number(data.price_too_expensive),
+      interest_level: data.interest_level,
+      source: 'instagram'
+    };
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/survey_responses`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok) throw new Error('Request failed');
+
+      document.getElementById('form-wrap').style.display = 'none';
+      document.getElementById('thankyou').style.display = 'block';
+    } catch (err) {
+      errorMsg.style.display = 'block';
+    }
+  });
+</script>
+
+</body>
+</html>
