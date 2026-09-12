@@ -329,10 +329,9 @@
 </footer>
 
 <script>
-  // ---- Fill these in with your real Supabase project details ----
-  const SUPABASE_URL = "https://tjbnnujccdgpdxmywpaj.supabase.co";
-  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqYm5udWpjY2RncGR4bXl3cGFqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5MzIyNjksImV4cCI6MjEwNDUwODI2OX0.jq5_JPTXkvfJXUGEJmNyNdDh9aa3uLeAfJAk17Q_jBg";
-  // ------------------------------------------------------------------
+  // ---- Paste your Google Apps Script Web App URL here ----
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxR9qW84xbBfdwG2n0j8PjhELn97LP8K-2IwKhdzlpXUZ6zHvm5F1aDODWiVtN_894_/exec";
+  // ----------------------------------------------------------
 
   const form = document.getElementById('survey-form');
   const errorMsg = document.getElementById('error-msg');
@@ -358,18 +357,19 @@
     };
 
     try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/survey_responses`, {
+      // NOTE: Content-Type is deliberately 'text/plain' here (not 'application/json').
+      // This avoids a CORS preflight (OPTIONS) request, which Apps Script web apps
+      // don't handle. The server still parses the body as JSON.
+      const res = await fetch(SCRIPT_URL, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Prefer': 'return=minimal'
+          'Content-Type': 'text/plain;charset=utf-8'
         },
         body: JSON.stringify(payload)
       });
 
-      if (!res.ok) throw new Error('Request failed');
+      const result = await res.json();
+      if (result.status !== 'success') throw new Error(result.message || 'Request failed');
 
       document.getElementById('form-wrap').style.display = 'none';
       document.getElementById('thankyou').style.display = 'block';
